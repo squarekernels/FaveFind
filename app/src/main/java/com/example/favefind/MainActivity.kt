@@ -1,11 +1,14 @@
 package com.example.favefind
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,6 +20,8 @@ private const val TAG = "MainActivity"
 
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var rvRestaurants: RecyclerView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -26,6 +31,14 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        rvRestaurants = findViewById(R.id.rvRestaurants)
+
+        val restaurants = mutableListOf<YelpRestaurant>()
+        val adapter = RestaurantsAdapter(this, restaurants)
+        rvRestaurants.adapter = adapter
+        rvRestaurants.layoutManager = LinearLayoutManager(this)
+
 
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -40,6 +53,13 @@ class MainActivity : AppCompatActivity() {
                 response: Response<YelpSearchResult>
             ) {
                 Log.i(TAG, "onResponse $response")
+                val body = response.body()
+                if (body == null) {
+                    Log.w(TAG, "Did not receive valid response from Yelp API")
+                    return
+                }
+                restaurants?.addAll(body.restaurants)
+                adapter.notifyDataSetChanged()
             }
 
             override fun onFailure(call: Call<YelpSearchResult>, t: Throwable) {
