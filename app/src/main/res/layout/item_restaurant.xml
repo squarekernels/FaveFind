@@ -11,10 +11,11 @@
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/ratingBar"
+        app:layout_constraintStart_toEndOf="@+id/ivRestaurant"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints"
         tools:text="MM Alam" />
@@ -35,17 +36,17 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:textColor="@android:color/darker_gray"
+        app:layout_constraintStart_toStartOf="@+id/tvAddress"
         app:layout_constraintTop_toBottomOf="@+id/tvAddress"
-        tools:layout_editor_absoluteX="143dp"
-        tools:text="Breakfast Brunch"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:text="Breakfast Brunch" />
 
     <TextView
         android:id="@+id/tvAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        app:layout_constraintStart_toStartOf="@+id/tvCategory"
+        app:layout_constraintStart_toStartOf="@+id/ratingBar"
         app:layout_constraintTop_toBottomOf="@+id/ratingBar"
         tools:ignore="MissingConstraints"
         tools:text="363 A Johar" />
@@ -54,7 +55,7 @@
         android:id="@+id/tvNumReviews"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="4dp"
         android:textColor="@android:color/darker_gray"
         app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
         app:layout_constraintStart_toEndOf="@+id/ratingBar"
@@ -67,11 +68,10 @@
         android:id="@+id/tvDistance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:layout_marginEnd="4dp"
         android:textColor="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="@+id/tvAddress"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         tools:text="1.02 mi" />
 
     <RatingBar
@@ -82,14 +82,14 @@
         android:numStars="5"
         android:rating="4.5"
         app:layout_constraintBottom_toTopOf="@+id/tvCategory"
-        app:layout_constraintStart_toStartOf="@+id/tvCategory"
+        app:layout_constraintStart_toStartOf="@+id/tvName"
         app:layout_constraintTop_toBottomOf="@+id/tvName"
         app:layout_constraintVertical_bias="0.3" />
 
     <TextView
         android:id="@+id/tvPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="25dp"
+        android:layout_height="24dp"
         android:layout_marginTop="4dp"
         android:text="$$"
         android:textColor="@android:color/darker_gray"

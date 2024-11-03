@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 class RestaurantsAdapter(val context: Context, val restaurants: List<YelpRestaurant>) : RecyclerView.Adapter<RestaurantsAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
@@ -46,7 +47,11 @@ class RestaurantsAdapter(val context: Context, val restaurants: List<YelpRestaur
             tvCategory.text = restaurant.categories[0].title
             tvDistance.text = restaurant.displayDistance()
             tvPrice.text = restaurant.price
-
+            Glide.with(context)
+                .load(restaurant.imageUrl)
+                .centerCrop()
+                .override(300, 300)
+                .into(ivRestaurant)
         }
     }
 }
