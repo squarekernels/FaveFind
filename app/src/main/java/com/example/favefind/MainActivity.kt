@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                     Log.w(TAG, "Did not receive valid response from Yelp API")
                     return
                 }
-                restaurants?.addAll(body.restaurants)
+                restaurants.addAll(body.restaurants)
                 adapter.notifyDataSetChanged()
             }
 

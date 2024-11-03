@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -29,9 +30,23 @@ class RestaurantsAdapter(val context: Context, val restaurants: List<YelpRestaur
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
         val tvName = itemView.findViewById<TextView>(R.id.tvName)
+        val ivRestaurant = itemView.findViewById<ImageView>(R.id.ivRestaurant)
+        val ratingBar = itemView.findViewById<RatingBar>(R.id.ratingBar)
+        val tvAddress = itemView.findViewById<TextView>(R.id.tvAddress)
+        val tvNumReviews = itemView.findViewById<TextView>(R.id.tvNumReviews)
+        val tvCategory = itemView.findViewById<TextView>(R.id.tvCategory)
+        val tvDistance = itemView.findViewById<TextView>(R.id.tvDistance)
+        val tvPrice = itemView.findViewById<TextView>(R.id.tvPrice)
 
         fun bind(restaurant: YelpRestaurant) {
             tvName.text = restaurant.name
+            ratingBar.rating = restaurant.rating.toFloat()
+            tvNumReviews.text = "${restaurant.reviews} reviews"
+            tvAddress.text = restaurant.location.address1
+            tvCategory.text = restaurant.categories[0].title
+            tvDistance.text = restaurant.displayDistance()
+            tvPrice.text = restaurant.price
+
         }
     }
 }
